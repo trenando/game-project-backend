@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My Backend Project API",
+        "description": "Application API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+        "/login": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "login"
+            }
+        },
+        "/register": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "register"
+            }
+        },
+        "/logout": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "You are not authorized"
+                    }
+                },
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "logout"
+            }
+        },
+        "/token": {
+            "post": {
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "token"
+            }
+        }
+    },
+    "definitions": {
+        "Login": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "troy@test.com",
+                    "maximum": "255 symbols"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "somepass",
+                    "minimum": "8 symbols",
+                    "maximum": "1024 symbols"
+                }
+            }
+        },
+        "Register": {
+            "type": "object",
+            "required": [
+                "login",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "example": "somelogin",
+                    "minimum": "3 symbols",
+                    "maximum": "255 symbols"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "troy@test.com",
+                    "maximum": "255 symbols"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "somepass",
+                    "minimum": "8 symbols",
+                    "maximum": "1024 symbols"
+                }
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ]
+}
