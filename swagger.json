@@ -25,7 +25,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/LoginReturn"
+                        }
                     },
                     "400": {
                         "description": "Bad Request"
@@ -96,13 +99,16 @@
                         "in": "body",
                         "name": "body",
                         "schema": {
-                            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8"
+                            "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
                     },
                     "401": {
                         "description": "Not authorized"
@@ -166,6 +172,29 @@
                 }
             }
         },
+        "LoginReturn": {
+            "type": "object",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "enum": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv39"
+                    ]
+                },
+                "refreshToken": {
+                    "type": "string",
+                    "enum": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8"
+                    ]
+                },
+                "expireAt": {
+                    "type": "string",
+                    "enum": [
+                        "00:00:00"
+                    ]
+                }
+            }
+        },
         "Register": {
             "type": "object",
             "required": [
@@ -196,16 +225,20 @@
         },
         "Profile": {
             "type": "object",
+            "required": [
+                "login",
+                "name",
+                "postCount",
+                "subCount"
+            ],
             "properties": {
                 "login": {
                     "type": "string",
-                    "example": "somelogin",
-                    "required": true
+                    "example": "somelogin"
                 },
                 "name": {
                     "type": "string",
-                    "example": "somename",
-                    "required": true
+                    "example": "somename"
                 },
                 "surname": {
                     "type": "string",
@@ -220,12 +253,21 @@
                     "example": 42
                 },
                 "postCount": {
-                    "type": "number",
-                    "required": true
+                    "type": "number"
                 },
                 "subCount": {
-                    "type": "number",
-                    "required": true
+                    "type": "number"
+                }
+            }
+        },
+        "Token": {
+            "type": "object",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "enum": [
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv39"
+                    ]
                 }
             }
         }

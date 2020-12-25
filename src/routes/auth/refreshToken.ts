@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { Token } from "../../model/Token";
 import { IToken } from "../../model/modelTypes";
 import { userIdDecoder } from "../../token/verifyToken";
-import { generateToken, expireMin } from "../../token/generateToken";
+import { generateToken, setCustomMin } from "../../token/generateToken";
 import { PostRefreshToken } from "./authTypes";
 
 export const postRefreshToken: PostRefreshToken = async (req, res) => {
@@ -16,7 +16,7 @@ export const postRefreshToken: PostRefreshToken = async (req, res) => {
     await Token.updateOne({ _id: userToken._id }, {
         $set: {
             token: generateToken({ _id: userToken._id }),
-            expireAt: expireMin(10),
+            expireAt: setCustomMin(10),
             createdAt: Date()
         }
     });

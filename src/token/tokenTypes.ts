@@ -22,6 +22,6 @@ export type GenerateToken = (userId: UserId) => string;
 
 export type UserIdDecoder = (token: string | undefined) => string;
 
-export type ExpireMinimum = (minutes: number) => string;
+export type SetCustomMin = (minutes: number) => string;
 
 export type VerifyType = (req: Request<core.ParamsDictionary, Response, IncomingHttpHeaders, core.Query>, res: Response, next: NextFunction) => Promise<any>;

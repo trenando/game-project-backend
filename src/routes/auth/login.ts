@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { loginValidation } from "../../validation/authValidation/authValidation";
 import { User } from "../../model/User";
 import { Token } from "../../model/Token";
-import { generateToken, expireMin, generateRefreshToken } from "../../token/generateToken";
+import { generateToken, setCustomMin, generateRefreshToken } from "../../token/generateToken";
 import { Login, RegisterValidationError } from "./authTypes";
 import { IToken, IUser } from '../../model/modelTypes';
 
@@ -24,12 +24,12 @@ export const login: Login = async (req, res) => {
         _id: user._id,
         token,
         refreshToken,
-        expireAt: expireMin(10),
-        createdAt: Date()
+        expireAt: setCustomMin(10),
+        createdAt: setCustomMin(0)
     });
     try {
         const saveToken: IToken = await authToken.save();
-        return res.json({ accessToken: saveToken.token, refreshToken: saveToken.refreshToken }).send();
+        return res.json({ accessToken: saveToken.token, refreshToken: saveToken.refreshToken, expireAt: saveToken.expireAt }).send();
     } catch (err) {
         return res.status(400).send(err);
     };
