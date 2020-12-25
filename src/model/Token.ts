@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { IToken, TokenSchema } from "./modelTypes";
 
-const tokenSchema = new mongoose.Schema({
+const tokenSchema: mongoose.Schema<TokenSchema> = new mongoose.Schema({
     _id: {
         type: mongoose.Types.ObjectId,
         required: true
@@ -23,4 +24,4 @@ const tokenSchema = new mongoose.Schema({
     }
 });
 
-export const Token = mongoose.model("Token", tokenSchema);
+export const Token: mongoose.Model<IToken> = mongoose.model("Token", tokenSchema);

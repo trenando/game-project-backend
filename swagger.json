@@ -9,7 +9,7 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
-    "host": "localhost:3000",
+    "host": "localhost:4000",
     "basePath": "/",
     "paths": {
         "/login": {
@@ -26,6 +26,9 @@
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 },
                 "tags": [
@@ -48,6 +51,9 @@
                 "responses": {
                     "201": {
                         "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     }
                 },
                 "tags": [
@@ -88,18 +94,54 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "body"
+                        "name": "body",
+                        "schema": {
+                            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK"
+                    },
+                    "401": {
+                        "description": "Not authorized"
+                    },
+                    "403": {
+                        "description": "Invalid token"
                     }
                 },
                 "tags": [
                     "auth"
                 ],
                 "operationId": "token"
+            }
+        },
+        "/profile": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Profile"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Not authorized"
+                    }
+                },
+                "tags": [
+                    "user"
+                ],
+                "operationId": "profile"
             }
         }
     },
@@ -113,14 +155,14 @@
             "properties": {
                 "email": {
                     "type": "string",
-                    "example": "troy@test.com",
-                    "maximum": "255 symbols"
+                    "example": "test@test.com",
+                    "maximum": "64 symbols"
                 },
                 "password": {
                     "type": "string",
                     "example": "somepass",
                     "minimum": "8 symbols",
-                    "maximum": "1024 symbols"
+                    "maximum": "128 symbols"
                 }
             }
         },
@@ -129,25 +171,61 @@
             "required": [
                 "login",
                 "email",
-                "password"
+                "password",
+                "name"
             ],
             "properties": {
                 "login": {
                     "type": "string",
                     "example": "somelogin",
                     "minimum": "3 symbols",
-                    "maximum": "255 symbols"
+                    "maximum": "64 symbols"
                 },
                 "email": {
                     "type": "string",
                     "example": "troy@test.com",
-                    "maximum": "255 symbols"
+                    "maximum": "64 symbols"
                 },
                 "password": {
                     "type": "string",
                     "example": "somepass",
                     "minimum": "8 symbols",
-                    "maximum": "1024 symbols"
+                    "maximum": "128 symbols"
+                }
+            }
+        },
+        "Profile": {
+            "type": "object",
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "example": "somelogin",
+                    "required": true
+                },
+                "name": {
+                    "type": "string",
+                    "example": "somename",
+                    "required": true
+                },
+                "surname": {
+                    "type": "string",
+                    "example": "somesurname"
+                },
+                "gender": {
+                    "type": "string",
+                    "example": "male/female"
+                },
+                "age": {
+                    "type": "number",
+                    "example": 42
+                },
+                "postCount": {
+                    "type": "number",
+                    "required": true
+                },
+                "subCount": {
+                    "type": "number",
+                    "required": true
                 }
             }
         }

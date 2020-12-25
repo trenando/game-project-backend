@@ -1,23 +1,49 @@
 import mongoose from "mongoose";
+import { IUser, UserSchema } from "./modelTypes";
 
-const userSchema = new mongoose.Schema({
+const userSchema: mongoose.Schema<UserSchema> = new mongoose.Schema({
     login: {
         type: String,
         required: true,
         min: 3,
-        max: 255
+        max: 64
     },
     email: {
         type: String,
         required: true,
-        max: 255
+        max: 64
     },
     password: {
         type: String,
         required: true,
         min: 8,
-        max: 1024
+        max: 128
+    },
+    name: {
+        type: String,
+        min: 2,
+        max: 64,
+        required: true
+    },
+    surname: {
+        type: String,
+        min: 2,
+        max: 64,
+    },
+    gender: {
+        type: String
+    },
+    age: {
+        type: String
+    },
+    postCount: {
+        type: Number,
+        required: true
+    },
+    subCount: {
+        type: Number,
+        required: true
     }
 });
 
-export const User =  mongoose.model("User", userSchema);
+export const User: mongoose.Model<IUser> = mongoose.model("User", userSchema);

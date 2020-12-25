@@ -4,9 +4,9 @@ import { Logout } from "./authTypes";
 
 export const logout: Logout = async (req, res) => {
     try {
-        await Token.deleteOne({ _id: userIdDecoder(req.headers.token as string) });
+        await Token.deleteOne({ _id: userIdDecoder(req.headers.token) });
         return res.status(200).send("Logout was successfull");
-    } catch (err) {
+    } catch {
         return res.status(401).send("You are not authorized");
     };
 };

@@ -1,12 +1,11 @@
-import Express from "express";
-import "../../config";
+import Express, { Router } from "express";
 import { verify } from "../../token/verifyToken";
 import { register } from "./register";
 import { login } from "./login";
 import { logout } from "./logout";
 import { postRefreshToken } from "./refreshToken";
 
-const authRouter = Express.Router();
+const authRouter: Router = Express.Router();
 
 authRouter.post("/register", register);
 

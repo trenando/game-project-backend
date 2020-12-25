@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import swaggerUI from "swagger-ui-express";
 import * as swaggerDocs from "../swagger.json";
 import authRouter from "./routes/auth/authRouter";
+import userRouter from "./routes/profile/userRouter";
 import mongoose from "mongoose";
 import "./config";
 
@@ -14,6 +15,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 // Middlewares
 app.use(bodyParser.json());
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 app.use("/api", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.listen(PORT, () => {
