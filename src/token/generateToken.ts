@@ -12,6 +12,5 @@ export const generateRefreshToken: GenerateToken = (userId) => {
 export const setCustomMin: SetCustomMin = (minutes) => {
     const copiedDate = new Date();
     copiedDate.setTime(copiedDate.getTime() + (minutes * 60 * 1000));
-    const someData = `${copiedDate.getHours()}:${copiedDate.getMinutes()}:${copiedDate.getSeconds()}`;
-    return someData;
+    return copiedDate.toString();
 };

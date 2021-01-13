@@ -16,7 +16,7 @@ export const verify: VerifyType = async (req, res, next) => {
 };
 
 export const userIdDecoder: UserIdDecoder = (token) => {
-    if(!token) return "";
-    const decodedId = Buffer.from(token.split('.')[1], "base64").toString("binary");
+    if (!token) return "";
+    const decodedId = Buffer.from(token.split(" ")[1].split(".")[1], "base64").toString("binary");
     return JSON.parse(decodedId)._id;
 };

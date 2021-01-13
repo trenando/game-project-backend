@@ -27,7 +27,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/LoginReturn"
+                            "$ref": "#/definitions/LoginResponse"
                         }
                     },
                     "400": {
@@ -83,7 +83,7 @@
                         "description": "OK"
                     },
                     "401": {
-                        "description": "You are not authorized"
+                        "description": "Not authorized"
                     }
                 },
                 "tags": [
@@ -107,7 +107,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Token"
+                            "$ref": "#/definitions/TokenResponse"
                         }
                     },
                     "401": {
@@ -172,7 +172,7 @@
                 }
             }
         },
-        "LoginReturn": {
+        "LoginResponse": {
             "type": "object",
             "properties": {
                 "accessToken": {
@@ -185,12 +185,6 @@
                     "type": "string",
                     "enum": [
                         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8"
-                    ]
-                },
-                "expireAt": {
-                    "type": "string",
-                    "enum": [
-                        "00:00:00"
                     ]
                 }
             }
@@ -220,6 +214,12 @@
                     "example": "somepass",
                     "minimum": "8 symbols",
                     "maximum": "128 symbols"
+                },
+                "name":{
+                    "type": "string",
+                    "example": "somename",
+                    "minimum": "2 symbols",
+                    "maximum": "64 symbols"
                 }
             }
         },
@@ -260,7 +260,7 @@
                 }
             }
         },
-        "Token": {
+        "TokenResponse": {
             "type": "object",
             "properties": {
                 "accessToken": {

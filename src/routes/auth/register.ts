@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { IUser } from '../../model/modelTypes';
 import { User } from "../../model/User";
+import { EMAIL_ERROR, REGISTRATION_SUCCESS } from '../../response-constants/auth';
 import { registerValidation } from "../../validation/authValidation/authValidation";
 import { Register, RegisterValidationError } from "./authTypes";
 
@@ -10,9 +11,9 @@ export const register: Register = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
 
     const emailExist: IUser | null = await User.findOne({ email: req.body.email });
-    if (emailExist) return res.status(400).send("Email already exists");
+    if (emailExist) return res.status(400).send(EMAIL_ERROR);
 
-    //hash pass
+    // Хэш пароль
     const salt: string = await bcrypt.genSalt(10);
     const hashedPassword: string = await bcrypt.hash(req.body.password, salt);
 
@@ -27,8 +28,8 @@ export const register: Register = async (req, res) => {
 
     try {
         await user.save();
-        return res.status(201).send("The user was created");
+        return res.status(201).send(REGISTRATION_SUCCESS);
     } catch (err) {
-        return res.status(400).send(err);
+        return res.status(400).send(`Непредвиденная ошибка: ${err}`);
     };
 };
