@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import bodyParser from "body-parser";
 import swaggerUI from "swagger-ui-express";
-import * as swaggerDocs from "../swagger.json";
+import { swagger } from "./openAPI";
 import authRouter from "./routes/auth/authRouter";
 import userRouter from "./routes/profile/userRouter";
 import mongoose from "mongoose";
@@ -16,8 +16,8 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(bodyParser.json());
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
-app.use("/api", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/api", swaggerUI.serve, swaggerUI.setup(swagger));
 
 app.listen(PORT, () => {
-    console.log(`server start on localhost:${PORT}`);
+  console.log(`server start on localhost:${PORT}`);
 });

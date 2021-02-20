@@ -34,7 +34,7 @@ const userSchema: mongoose.Schema<UserSchema> = new mongoose.Schema({
         type: String
     },
     age: {
-        type: String
+        type: Number
     },
     postCount: {
         type: Number,
