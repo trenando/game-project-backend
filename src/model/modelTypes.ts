@@ -12,7 +12,7 @@ export interface IUser extends mongoose.Document {
     subCount: number
 };
 
-export type UserSchema = {
+export interface UserSchema extends mongoose.Document {
     login: string,
     email: string,
     password: string,
@@ -32,7 +32,7 @@ export interface IToken extends mongoose.Document {
     createdAt: string,
 };
 
-export type TokenSchema = {
+export interface TokenSchema extends mongoose.Document {
     _id: mongoose.Types.ObjectId,
     token: string,
     refreshToken: string,
