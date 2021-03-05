@@ -1,22 +1,22 @@
 import bcrypt from "bcrypt";
-import { IUser } from "../../model/modelTypes";
+import { UserSchema } from "../../model/modelTypes";
 import { User } from "../../model/User";
 import { EMAIL_ERROR, REGISTRATION_SUCCESS } from "../../response-constants/auth";
-import { registerValidation } from "../../schemes/validation/authValidation";
+import { registerValidation } from "../../schemes/validation/authValidation/authValidation";
 import { Register, RegisterValidationError } from "./authTypes";
 
 export const register: Register = async (req, res) => {
   const { error }: RegisterValidationError = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const emailExist: IUser | null = await User.findOne({ email: req.body.email });
+  const emailExist: UserSchema | null = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send(EMAIL_ERROR);
 
   // Хэш пароль
   const salt: string = await bcrypt.genSalt(10);
   const hashedPassword: string = await bcrypt.hash(req.body.password, salt);
 
-  const user: IUser = new User({
+  const user: UserSchema = new User({
     login: req.body.login,
     email: req.body.email,
     password: hashedPassword,

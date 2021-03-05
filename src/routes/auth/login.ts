@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
-import { loginValidation } from "../../schemes/validation/authValidation";
+import { loginValidation } from "../../schemes/validation/authValidation/authValidation";
 import { User } from "../../model/User";
 import { Token } from "../../model/Token";
 import { generateToken, setCustomMin, generateRefreshToken } from "../../token/generateToken";
 import { Login, RegisterValidationError } from "./authTypes";
-import { IToken, IUser } from "../../model/modelTypes";
+import { TokenSchema, UserSchema } from "../../model/modelTypes";
 import { WRONG_USER } from "../../response-constants/auth";
 
 export const login: Login = async (req, res) => {
@@ -12,7 +12,7 @@ export const login: Login = async (req, res) => {
   const { error }: RegisterValidationError = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const user: IUser | null = await User.findOne({ email: req.body.email });
+  const user: UserSchema | null = await User.findOne({ email: req.body.email });
   if (!user) return res.status(400).send(WRONG_USER);
 
   // Корректный пароль
@@ -21,7 +21,7 @@ export const login: Login = async (req, res) => {
 
   const token: string = generateToken({ _id: user._id });
   const refreshToken: string = generateRefreshToken({ _id: user._id });
-  const authToken: IToken = new Token({
+  const authToken: TokenSchema = new Token({
     _id: user._id,
     token,
     refreshToken,
@@ -29,9 +29,9 @@ export const login: Login = async (req, res) => {
     createdAt: setCustomMin(0),
   });
   try {
-    const saveToken: IToken = await authToken.save();
+    const saveToken: TokenSchema = await authToken.save();
     return res.json({ accessToken: saveToken.token, refreshToken: saveToken.refreshToken });
   } catch (err) {
-    return res.status(400).send(err);
+    return res.status(400).send(`Непредвиденная ошибка: ${err}`);
   }
 };

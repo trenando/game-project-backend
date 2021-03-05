@@ -1,8 +1,10 @@
-import { swAuthRoutes } from "./routes/auth/swAuthRoutes";
-import { swProfileRoutes } from "./routes/profile/swProfileRoutes";
+import { swaggerAuthRoutes } from "./routes/auth/swaggerAuthRoutes";
+import { swaggerProfileRoutes } from "./routes/profile/swaggerProfileRoutes";
+import { swaggerPostsRoutes } from "./routes/posts/swaggerPostsRoutes";
 import loginSchema from "./schemes/authSchemes/loginSchema";
 import registerSchema from "./schemes/authSchemes/registerSchema";
 import profileSchema from "./schemes/profileSchemes/profileSchema";
+import { postsListSchema } from "./schemes/postsSchemes/postsListSchema";
 
 export const swagger = {
   openapi: "3.0.0",
@@ -18,8 +20,9 @@ export const swagger = {
     },
   ],
   paths: {
-    ...swAuthRoutes,
-    ...swProfileRoutes,
+    ...swaggerAuthRoutes,
+    ...swaggerProfileRoutes,
+    ...swaggerPostsRoutes,
   },
   components: {
     schemas: {
@@ -31,6 +34,9 @@ export const swagger = {
       },
       Profile: {
         ...profileSchema,
+      },
+      Posts: {
+        ...postsListSchema,
       },
     },
     securitySchemes: {
