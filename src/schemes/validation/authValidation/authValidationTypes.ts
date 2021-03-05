@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { UserSchema } from "../../model/modelTypes";
+import { UserSchema } from "../../../model/modelTypes";
 
 export type LoginValidationData = {
   email: string;

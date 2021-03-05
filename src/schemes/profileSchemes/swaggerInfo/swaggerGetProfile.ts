@@ -1,6 +1,6 @@
 import schema from "../profileSchema";
 
-export const swGetProfile = {
+export const swaggerGetProfile = {
   tags: ["user"],
   operationId: "profile",
   security: [

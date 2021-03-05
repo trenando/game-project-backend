@@ -1,4 +1,4 @@
-export const swDeleteLogout = {
+export const swaggerDeleteLogout = {
   tags: ["auth"],
   operationId: "logout",
   security: [
@@ -15,6 +15,9 @@ export const swDeleteLogout = {
   responses: {
     "200": {
       description: "OK",
+    },
+    "400": {
+      description: "Bad request",
     },
     "401": {
       description: "Not authorized",

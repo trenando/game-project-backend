@@ -1,8 +1,8 @@
-import schema from "../loginSchema";
+import schema from "../tokenSchema";
 
-export const swPostLogin = {
+export const swaggerPostToken = {
   tags: ["auth"],
-  operationId: "login",
+  operationId: "token",
   parameters: [
     {
       in: "body",
@@ -26,19 +26,16 @@ export const swPostLogin = {
                   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv39",
                 ],
               },
-              refreshToken: {
-                type: "string",
-                enum: [
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmRjMjg1ZmM2OTk1ZTBmZTAxOGZlMWUiLCJpYXQiOjE2MDg0MzU5MjB9.U93_wqFcW95Rzf-gJakrq8mjsqwgrKpEBO34n6Kv3v8",
-                ],
-              },
             },
           },
         },
       },
     },
-    "400": {
-      description: "Bad Request",
+    "401": {
+      description: "Not authorized",
     },
-  }
+    "403": {
+      description: "Invalid token",
+    },
+  },
 };

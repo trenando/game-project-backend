@@ -1,6 +1,6 @@
 import schema from "../registerSchema";
 
-export const swPostRegister = {
+export const swaggerPostRegister = {
   tags: ["auth"],
   operationId: "register",
   parameters: [

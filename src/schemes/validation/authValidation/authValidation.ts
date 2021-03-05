@@ -1,6 +1,6 @@
 import Joi from "joi";
 import { RegisterValidation, LoginValidation, LoginValidationData } from "./authValidationTypes";
-import { UserSchema } from "../../model/modelTypes";
+import { UserSchema } from "../../../model/modelTypes";
 
 export const registerValidation: RegisterValidation = (data) => {
   const schema: Joi.ObjectSchema<UserSchema> = Joi.object({
