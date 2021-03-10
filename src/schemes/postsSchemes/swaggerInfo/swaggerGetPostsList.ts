@@ -9,16 +9,16 @@ export const swaggerGetPosts = {
       name: "page",
       required: true,
       schema: {
-        type: "number",
+        type: "string",
       },
-      example: "page=0"
+      example: "page=1"
     },
     {
       in: "query",
       name: "limit",
       required: true,
       schema: {
-        type: "number",
+        type: "string",
       },
       example: "limit=10"
     },

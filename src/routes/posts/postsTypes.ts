@@ -12,14 +12,14 @@ type PostsResponse =
   | string;
 
 type PostsQueryParams = {
-  page: number;
-  limit: number;
+  page: string;
+  limit: string;
 };
 
-type RequestCreatePost = {
-  title: string;
-  text: string;
-};
+interface RequestCreatePost extends IncomingHttpHeaders {
+  postTitle: string;
+  postText: string;
+}
 
 export interface PostsValidationError {
   error?: Joi.ValidationError | undefined;
@@ -32,9 +32,9 @@ export type PostsList = (
 
 export type PostsArray = {
   postId: mongoose.Types.ObjectId;
-  title: string;
+  postTitle: string;
   login: string;
-  date: Date;
+  date: string;
 }[];
 
 export type CreatePost = (

@@ -3,11 +3,11 @@ import { PostsSchema } from "./modelTypes";
 import { User } from "./User";
 
 const postsSchema: mongoose.Schema<PostsSchema> = new mongoose.Schema({
-  title: {
+  postTitle: {
     type: String,
     required: true,
   },
-  text: {
+  postText: {
     type: String,
     required: true,
   },

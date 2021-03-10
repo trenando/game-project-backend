@@ -1,8 +1,8 @@
 import { User } from "../../model/User";
 import { Profile } from "./userTypes";
-import { userIdDecoder } from "../../token/verifyToken";
 import { UserSchema } from "../../model/modelTypes";
 import { PROFILE_ERROR } from "../../response-constants/profile";
+import { userIdDecoder } from "../../userIdDecoder";
 
 export const profile: Profile = async (req, res) => {
 

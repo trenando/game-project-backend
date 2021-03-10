@@ -2,7 +2,7 @@ import schema from "../createPostSchema";
 
 export const swaggerPostCreatePost = {
   tags: ["posts"],
-  operationId: "add",
+  operationId: "item",
   security: [
     {
       bearerAuth: [],

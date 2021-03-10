@@ -7,7 +7,7 @@ export const swaggerPostsRoutes = {
       ...swaggerGetPosts,
     },
   },
-  "/add": {
+  "/item": {
     post: {
       ...swaggerPostCreatePost
     },

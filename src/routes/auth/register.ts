@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { UserSchema } from "../../model/modelTypes";
 import { User } from "../../model/User";
-import { EMAIL_ERROR, REGISTRATION_SUCCESS } from "../../response-constants/auth";
+import { EMAIL_ERROR, REGISTRATION_SUCCESS, USER_EXIST_ERROR } from "../../response-constants/auth";
 import { registerValidation } from "../../schemes/validation/authValidation/authValidation";
 import { Register, RegisterValidationError } from "./authTypes";
 
@@ -11,6 +11,9 @@ export const register: Register = async (req, res) => {
 
   const emailExist: UserSchema | null = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send(EMAIL_ERROR);
+
+  const userExist: UserSchema | null = await User.findOne({ login: req.body.login });
+  if (userExist) return res.status(400).send(USER_EXIST_ERROR);
 
   // Хэш пароль
   const salt: string = await bcrypt.genSalt(10);

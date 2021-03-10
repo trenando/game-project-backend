@@ -7,6 +7,6 @@ const postsRoutes: Router = express.Router();
 
 postsRoutes.get("/list", postsList);
 
-postsRoutes.post("/add", verify, createPost);
+postsRoutes.post("/item", verify, createPost);
 
 export default postsRoutes;

@@ -4,3 +4,4 @@ export const AUTH_ERROR: string = "Ошибка авторизации.";
 export const BAD_TOKEN: string = "Пользователь не найден.";
 export const REGISTRATION_SUCCESS: string = "Пользователь успешно создан.";
 export const EMAIL_ERROR: string = "Данная почта уже существует.";
+export const USER_EXIST_ERROR:string = "Такой пользователь уже существует";

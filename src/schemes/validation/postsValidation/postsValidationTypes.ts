@@ -1,8 +1,8 @@
 import Joi from "joi";
 
 type CreatePostData = {
-  title: string;
-  text: string;
+  postTitle: string;
+  postText: string;
 };
 
 export type CreatePostValidation = (data: CreatePostData) => Joi.ValidationResult;

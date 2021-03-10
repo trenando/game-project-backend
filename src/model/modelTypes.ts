@@ -22,7 +22,8 @@ export interface TokenSchema extends mongoose.Document {
 
 export interface PostsSchema extends mongoose.Document {
   postId: mongoose.Types.ObjectId;
-  title: string;
+  postTitle: string;
+  postText: string;
   user: UserSchema;
-  date:Date;
+  date: Date;
 }

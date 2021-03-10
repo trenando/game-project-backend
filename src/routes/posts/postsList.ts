@@ -2,10 +2,11 @@ import { PostsArray, PostsList } from "./postsTypes";
 import { Posts } from "../../model/Posts";
 import { POSTS_DATABASE_ERROR } from "../../response-constants/posts";
 import { PostsSchema } from "../../model/modelTypes";
+import { customDate } from "../../customDate";
 
 export const postsList: PostsList = async (req, res) => {
-  const page: number = req.query.page;
-  const limit: number = req.query.limit;
+  const page: number = parseInt(req.query.page);
+  const limit: number = parseInt(req.query.limit);
 
   const postsCount: number | null = await Posts.find().countDocuments();
 
@@ -19,9 +20,9 @@ export const postsList: PostsList = async (req, res) => {
   const posts: PostsArray = sortedPosts.map((el: PostsSchema) => {
     return {
       postId: el._id,
-      title: el.title,
+      postTitle: el.postTitle,
       login: el.user.login,
-      date: el.date,
+      date: customDate(el.date),
     };
   });
 

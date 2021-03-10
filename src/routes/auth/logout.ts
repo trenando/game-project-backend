@@ -1,6 +1,6 @@
 import { Token } from "../../model/Token";
 import { LOGOUT_SUCCESS, AUTH_ERROR } from "../../response-constants/auth";
-import { userIdDecoder } from "../../token/verifyToken";
+import { userIdDecoder } from "../../userIdDecoder";
 import { Logout } from "./authTypes";
 
 export const logout: Logout = async (req, res) => {

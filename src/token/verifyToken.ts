@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import "../config";
 import { Token } from "../model/Token";
-import { UserIdDecoder, VerifyType, UserToken } from "./tokenTypes";
+import { userIdDecoder } from "../userIdDecoder";
+import {  VerifyType, UserToken } from "./tokenTypes";
 
 export const verify: VerifyType = async (req, res, next) => {
   const userToken: UserToken | null = await Token.findOne({
@@ -15,15 +16,4 @@ export const verify: VerifyType = async (req, res, next) => {
   } catch {
     return res.status(403).send("Access denied, refresh your token");
   }
-};
-
-export const userIdDecoder: UserIdDecoder = (token) => {
-  if (!token) return "";
-  let decodedId = "";
-  if (token.split(" ").length === 1) {
-    decodedId = Buffer.from(token.split(".")[1], "base64").toString("binary");
-  } else {
-    decodedId = Buffer.from(token.split(" ")[1].split(".")[1], "base64").toString("binary");
-  };
-  return JSON.parse(decodedId)._id;
 };

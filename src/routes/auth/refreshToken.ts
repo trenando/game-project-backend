@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import { Token } from "../../model/Token";
 import { TokenSchema } from "../../model/modelTypes";
-import { userIdDecoder } from "../../token/verifyToken";
 import { generateToken, setCustomMin } from "../../token/generateToken";
 import { RefreshToken } from "./authTypes";
 import { AUTH_ERROR, BAD_TOKEN } from "../../response-constants/auth";
+import { userIdDecoder } from "../../userIdDecoder";
 
 export const refreshToken: RefreshToken = async (req, res) => {
 
