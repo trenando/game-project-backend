@@ -11,7 +11,8 @@ export const swaggerGetPosts = {
       schema: {
         type: "string",
       },
-      example: "page=1"
+      example: "page=1",
+      default: "page=1"
     },
     {
       in: "query",
@@ -20,7 +21,8 @@ export const swaggerGetPosts = {
       schema: {
         type: "string",
       },
-      example: "limit=10"
+      example: "limit=10",
+      default: "limit=10"
     },
   ],
   responses: {

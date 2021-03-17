@@ -5,8 +5,10 @@ import { PostsSchema } from "../../model/modelTypes";
 import { customDate } from "../../customDate";
 
 export const postsList: PostsList = async (req, res) => {
-  const page: number = parseInt(req.query.page);
-  const limit: number = parseInt(req.query.limit);
+  let page: number = parseInt(req.query.page);
+  let limit: number = parseInt(req.query.limit);
+  if (isNaN(page)) page = 1;
+  if (isNaN(limit)) limit = 10;
 
   const postsCount: number | null = await Posts.find().countDocuments();
 

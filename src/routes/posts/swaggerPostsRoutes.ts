@@ -1,3 +1,4 @@
+import { swaggerGetPostById } from "../../schemes/postsSchemes/swaggerInfo/swaggerGetPostById";
 import { swaggerGetPosts } from "../../schemes/postsSchemes/swaggerInfo/swaggerGetPostsList";
 import { swaggerPostCreatePost } from "../../schemes/postsSchemes/swaggerInfo/swaggerPostCreatePost";
 
@@ -9,7 +10,12 @@ export const swaggerPostsRoutes = {
   },
   "/item": {
     post: {
-      ...swaggerPostCreatePost
+      ...swaggerPostCreatePost,
+    },
+  },
+  "/{postId}": {
+    get: {
+      ...swaggerGetPostById,
     },
   },
 };
