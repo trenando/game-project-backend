@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 import { TokenSchema } from "./modelTypes";
 
 const tokenSchema: mongoose.Schema<TokenSchema> = new mongoose.Schema({
-    _id: {
-        type: mongoose.Types.ObjectId,
-        required: true
-    },
     token: {
         type: String,
         required: true

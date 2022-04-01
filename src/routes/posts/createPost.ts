@@ -17,12 +17,19 @@ export const createPost: CreatePost = async (req, res) => {
   const post: PostsSchema = new Posts({
     postTitle: req.body.postTitle,
     postText: req.body.postText,
-    user: user,
+    user: {
+      _id: user._id,
+      login: user.login
+    },
     date: Date.now(),
   });
 
   try {
     await post.save();
+    await User.updateOne(
+      { _id: userIdDecoder(req.headers.token) },
+      { postCount: user.postCount + 1 }
+    )
     return res.status(201).send(POSTS_CREATED);
   } catch (err) {
     return res.status(400).send(`Неудачный запрос: ${err}`);

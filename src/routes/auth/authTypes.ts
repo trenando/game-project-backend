@@ -11,15 +11,15 @@ type RefreshTokenRequest = {
 
 type RefreshTokenResponse =
   | {
-      accessToken: string;
-    }
+    accessToken: string;
+  }
   | string;
 
 type LoginResponse =
   | {
-      accessToken: string;
-      refreshToken: string;
-    }
+    accessToken: string;
+    refreshToken: string;
+  }
   | string;
 
 export type Logout = (

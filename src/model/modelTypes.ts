@@ -7,13 +7,12 @@ export interface UserSchema extends mongoose.Document {
   name: string;
   surname?: string;
   gender?: string;
-  age?: number;
+  age?: string;
   postCount: number;
   subCount: number;
 }
 
 export interface TokenSchema extends mongoose.Document {
-  _id: mongoose.Types.ObjectId;
   token: string;
   refreshToken: string;
   expireAt: string;

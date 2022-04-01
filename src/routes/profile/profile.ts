@@ -10,13 +10,7 @@ export const profile: Profile = async (req, res) => {
     if (!userProfile) return res.status(401).send(PROFILE_ERROR);
 
     try {
-        //better use spread syntax later
-        return res.status(200).json({
-            login: userProfile.login,
-            name: userProfile.name,
-            postCount: userProfile.postCount,
-            subCount: userProfile.subCount
-        });
+        return res.status(200).json({ ...userProfile });
     } catch (err) {
         return res.status(400).send(`Неудачный запрос: ${err}`);
     };

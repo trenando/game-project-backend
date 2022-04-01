@@ -8,13 +8,18 @@ import mongoose from "mongoose";
 import "./config";
 
 const PORT: string = process.env.PORT as string;
-const mongoUrl: string = process.env.DATA_URL as string;
+/*const { LOGIN, PASSWORD, url, DATABASE } = process.env;
+const mongoUrl: string = `mongodb+srv://${LOGIN}:${PASSWORD}@${url}/${DATABASE}`;*/
+const mongoUrl: string = "mongodb://127.0.0.1:27017";
 const app: Express = express();
-try {
-  mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
-} catch (err) {
-  console.error(err);
-}
+mongoose.connect(mongoUrl)
+  .then(() => {
+    console.log("Mongodb is connected");
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 
 // Middlewares
 app.use(express.json());

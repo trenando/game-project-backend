@@ -9,6 +9,8 @@ export const registerValidation: RegisterValidation = (data) => {
     password: Joi.string().required().min(8).max(128),
     name: Joi.string().required().min(2).max(64),
     surname: Joi.string().min(2).max(64),
+    gender: Joi.string(),
+    age: Joi.string()
   });
   return schema.validate(data);
 };

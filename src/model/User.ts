@@ -5,12 +5,14 @@ const userSchema: mongoose.Schema<UserSchema> = new mongoose.Schema({
   login: {
     type: String,
     required: true,
+    unique: true,
     min: 3,
     max: 64,
   },
   email: {
     type: String,
     required: true,
+    unique: true,
     max: 64,
   },
   password: {
@@ -34,7 +36,7 @@ const userSchema: mongoose.Schema<UserSchema> = new mongoose.Schema({
     type: String,
   },
   age: {
-    type: Number,
+    type: String,
   },
   postCount: {
     type: Number,
